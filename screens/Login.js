@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Alert,
+  Alert,ImageBackground
 } from "react-native";
 import {
   getAuth,
@@ -16,6 +16,8 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { auth } from "../firebase";
+import { StatusBar } from "expo-status-bar";
+import { Image } from "react-native-web";
 
 const LoginScreen = ({ navigation }) => {
   const [Email, setEmail] = useState("");
@@ -50,7 +52,13 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
+ 
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <ImageBackground
+    source={require("../assets/background.jpeg")} 
+    style={styles.backgroundImage}
+  >
+  
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -77,9 +85,12 @@ const LoginScreen = ({ navigation }) => {
           >
             <Text>Opret Bruger</Text>
           </TouchableOpacity>
-        </View>
-      </View>
+
+         </View>
+        </View> 
+       </ImageBackground>
     </KeyboardAvoidingView>
+     
   );
 };
 
@@ -92,32 +103,58 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   inputContainer: {
+    flex: 1, // Add this to make it take up the available vertical space
+    justifyContent: "center", // Center vertically
+    alignItems: "center", // Center horizontally
     width: "80%",
+    marginTop: 300,
+    marginLeft: 30,
   },
   input: {
     backgroundColor: "white",
+    height:40,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
     marginTop: 10,
+    width: "100%", // Make inputs take up full width
   },
   buttonContainer: {
+    justifyContent: "center", // Center vertically
+    alignItems: "center", // Center horizontally
     width: "100%",
-    marginTop: 40,
-    justifyContent: "center",
-    alignItems: "center",
+    marginTop: 70,
   },
   button: {
     width: "80%",
-    backgroundColor: "blue",
+    backgroundColor: 'rgba(1, 188, 275, 0.5)',
     padding: 12,
     borderRadius: 10,
     textAlign: "center",
+    shadowColor: "black", 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.3,
+    shadowRadius: 4, 
+    elevation: 2,
   },
   buttonOutline: {
-    backgroundColor: "white",
+    backgroundColor: "white", 
     marginTop: 10,
-    borderColor: "blue",
+    borderColor: "transparent", 
     borderWidth: 2,
+    shadowColor: "black", 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.3,
+    shadowRadius: 4, 
+    elevation: 2, 
   },
+  backgroundImage: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover", // Make the image cover the entire view
+  },
+  
+  
+ 
 });
